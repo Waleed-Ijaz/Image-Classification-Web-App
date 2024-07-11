@@ -1,11 +1,12 @@
 import streamlit as st
 import numpy as np
 import tensorflow as tf
+from huggingface_hub import hf_hub_download
 from tensorflow.keras.models import load_model
 from PIL import Image
 
 # Replace the path to your .h5 file
-model_path = 'weights/best_model.h5'
+model_path = 'Dental_CNN_v3_model.h5'
 
 # Setting page layout
 st.set_page_config(
@@ -26,6 +27,16 @@ with st.sidebar:
 st.title("Dental Treatment Classifier")
 st.caption('Upload an Image to classify')
 
+@st.cache(allow_output_mutation=True)
+def load_model():
+    # Download the model from Hugging Face Hub
+    model_path = hf_hub_download(repo_id="Waleed-Ijaz/dental_treatment_model", filename="Dental_CNN_v3_model.h5")
+    # Load the model
+    model = tf.keras.models.load_model(model_path)
+    return model
+
+
+
 # Creating two columns on the main page
 col1, col2 = st.columns(2)
 
@@ -39,7 +50,7 @@ if source_img:
 
     # Load the model
     try:
-        model = load_model(model_path)
+        model = load_model()
     except Exception as ex:
         st.error(f"Unable to load model. Check the specified path: {model_path}")
         st.error(ex)
