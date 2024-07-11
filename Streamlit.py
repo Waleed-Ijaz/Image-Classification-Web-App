@@ -5,9 +5,6 @@ from huggingface_hub import hf_hub_download
 from tensorflow.keras.models import load_model
 from PIL import Image
 
-# Replace the path to your .h5 file
-model_path = 'Dental_CNN_v3_model.h5'
-
 # Setting page layout
 st.set_page_config(
     page_title="Image Classification",
