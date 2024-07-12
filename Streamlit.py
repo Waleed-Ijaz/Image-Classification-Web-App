@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import numpy as np
 import tensorflow as tf
-from huggingface_hub import hf_hub_download
+from huggingface_hub import hf_hub_download, login
 from tensorflow.keras.models import load_model
 from PIL import Image
 from dotenv import load_dotenv
