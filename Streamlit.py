@@ -4,6 +4,16 @@ import tensorflow as tf
 from huggingface_hub import hf_hub_download
 from tensorflow.keras.models import load_model
 from PIL import Image
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Set your Hugging Face token as an environment variable or directly in the code
+HUGGINGFACE_TOKEN = os.getenv('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')
+
+# Login to Hugging Face using the token
+login(token=HUGGINGFACE_TOKEN)
 
 # Setting page layout
 st.set_page_config(
@@ -27,7 +37,7 @@ st.caption('Upload an Image to classify')
 @st.cache(allow_output_mutation=True)
 def load_model():
     # Download the model from Hugging Face Hub
-    model_path = hf_hub_download(repo_id="Waleed-Ijaz/dental_treatment_model", filename="Dental_CNN_v3_model.h5")
+    model_path = hf_hub_download(repo_id="Waleed-Ijaz/dental_treatment_model", filename="Dental_CNN_v3_model.h5", use_auth_token=HUGGINGFACE_TOKEN)
     # Load the model
     model = tf.keras.models.load_model(model_path)
     return model
