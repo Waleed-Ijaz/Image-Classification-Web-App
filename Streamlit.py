@@ -11,8 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Set your Hugging Face token as an environment variable or directly in the code
-HUGGINGFACE_TOKEN = os.getenv('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')
-
+HUGGINGFACE_TOKEN = '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'
 # Login to Hugging Face using the token
 login(token=HUGGINGFACE_TOKEN)
 
